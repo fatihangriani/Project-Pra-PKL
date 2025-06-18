@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8f8f8;
+}
+
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background: #ddd;
+    position: fixed;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.sidebar a {
+    display: block;
+    margin: 10px 0;
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar a.active {
+    font-weight: bold;
+    border-left: 3px solid #444;
+    padding-left: 5px;
+}
+
+.content {
+    margin-left: 220px;
+    padding: 30px;
+}
+
+h2 {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ccc;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background: white;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+table th {
+    background: #f0f0f0;
+}
+
+ button.ubah {
+      background: #6c7594;
+      border: none;
+      padding: 6px 12px;
+      margin-right: 6px;
+      cursor: pointer;
+      border-radius: 4px;
+      color: #2e25b4;
+      font-weight: 600;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    button.ubah:hover {
+      background-color: #c7d2fe;
+      color: #1e40af;
+    }
+    button.hapus {
+      background: #f73131;
+      color: rgb(236, 56, 56);
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    button.hapus:hover {
+      background-color: #ef4444;
+    }
