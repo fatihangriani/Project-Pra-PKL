@@ -44,6 +44,9 @@ $harian  = mysqli_fetch_assoc($harian);
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
 /* ——— gaya singkat (dipotong) ——— */
 :root{--primary:#4361ee;--info:#4895ef;--success:#10b981;--warning:#f8961e;--gray:#6c757d;--dark:#212529;--white:#ffffff;--card-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06)}
@@ -126,10 +129,14 @@ body{background:#f8fafc;display:flex;min-height:100vh;color:#334155}
   </div>
 <br><br>
   <!-- tombol download -->
-  <div style="margin-top:20px">
-    <a href="export_pendapatan.php" class="btn-download btn-month"><i class="fas fa-download"></i> Download Pendapatan Bulanan</a>
-    <a href="export_harian.php"     class="btn-download btn-day"><i class="fas fa-download"></i> Download Pendapatan Hari Ini</a>
-  </div>
+<div style="margin-top:20px">
+  <a href="export_pendapatan.php" class="btn-download btn-month"><i class="fas fa-download"></i> Download Pendapatan Bulanan</a>
+  <a href="export_harian.php"     class="btn-download btn-day"><i class="fas fa-download"></i> Download Pendapatan Hari Ini</a>
+  <br><br>
+  <a href="#" onclick="downloadPDF()" class="btn-download btn-month"><i class="fas fa-file-pdf"></i> Simpan Grafik sebagai PDF</a>
+  <a href="#" onclick="downloadImage()" class="btn-download btn-day"><i class="fas fa-image"></i> Simpan Grafik sebagai Gambar</a>
+</div>
+
 
   <!-- laporan harian -->
   <h3 style="margin-top:40px"><i class="fas fa-calendar-day"></i> Laporan Pendapatan Hari Ini</h3>
@@ -177,5 +184,25 @@ new Chart(ctx,{
     scales:{y:{beginAtZero:true,ticks:{callback:v=>'Rp '+v.toLocaleString('id-ID')}}}
   }
 });
+async function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const canvas = await html2canvas(document.querySelector(".chart-container"));
+  const imgData = canvas.toDataURL("image/png");
+
+  const pdf = new jsPDF({ orientation: 'landscape' });
+  pdf.text("Grafik Pendapatan Bulanan", 10, 10);
+  pdf.addImage(imgData, 'PNG', 10, 20, 270, 130); // sesuaikan ukuran jika perlu
+  pdf.save("grafik-pendapatan.pdf");
+}
+
+async function downloadImage() {
+  const canvas = await html2canvas(document.querySelector(".chart-container"));
+  const imgData = canvas.toDataURL("image/png");
+
+  const link = document.createElement("a");
+  link.href = imgData;
+  link.download = "grafik-pendapatan.png";
+  link.click();
+}
 </script>
 </body></html>
