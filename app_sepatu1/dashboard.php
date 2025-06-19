@@ -1,7 +1,4 @@
 <?php
-/* ─────────────────────────────────────────────────────────────
-   DASHBOARD ADMIN  –  menampilkan statistik & laporan pendapatan
-   ───────────────────────────────────────────────────────────── */
 session_set_cookie_params(['path' => '/']);
 session_start();
 if (!isset($_SESSION['admin'])) {
