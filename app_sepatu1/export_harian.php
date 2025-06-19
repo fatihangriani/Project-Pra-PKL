@@ -1,16 +1,26 @@
 <?php
+require('../fpdf/fpdf.php');
 include '../home/koneksi.php';
-header("Content-Type: text/csv");
-header("Content-Disposition: attachment; filename=pendapatan_harian_".date('Y-m-d').".csv");
 
-$output = fopen("php://output","w");
-fputcsv($output,["Tanggal","Jumlah Transaksi","Total Pendapatan (Rp)"]);
+$tanggal = date('Y-m-d');
+$data = mysqli_fetch_assoc(mysqli_query($koneksi,
+    "SELECT COUNT(*) AS jumlah, COALESCE(SUM(total_harga),0) AS total
+     FROM transaksi WHERE DATE(tanggal_transaksi)='$tanggal'"));
 
-$today = date('Y-m-d');
-$q = mysqli_query($koneksi,"SELECT COUNT(*) AS jumlah,
-                                   COALESCE(SUM(total_harga),0) AS total
-                            FROM transaksi WHERE DATE(tanggal_transaksi)='$today'");
-$d = mysqli_fetch_assoc($q);
+$pdf = new FPDF();
+$pdf->AddPage();
+$pdf->SetFont('Arial','B',16);
+$pdf->Cell(190,10,"Laporan Pendapatan Harian",0,1,'C');
+$pdf->SetFont('Arial','',12);
+$pdf->Ln(10);
 
-fputcsv($output,[date('d-m-Y',strtotime($today)),$d['jumlah'],$d['total']]);
-fclose($output);
+$pdf->Cell(60,10,'Tanggal',1);
+$pdf->Cell(60,10,date('d M Y', strtotime($tanggal)),1,1);
+
+$pdf->Cell(60,10,'Jumlah Transaksi',1);
+$pdf->Cell(60,10,$data['jumlah'],1,1);
+
+$pdf->Cell(60,10,'Total Pendapatan',1);
+$pdf->Cell(60,10,'Rp '.number_format($data['total'],0,',','.'),1,1);
+
+$pdf->Output('D',"pendapatan_harian_$tanggal.pdf");
