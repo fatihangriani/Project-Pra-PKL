@@ -11,7 +11,7 @@ if (!isset($_SESSION['user'])) {
 $id_user = $_SESSION['user']['id'];
 
 $query = "SELECT 
-    transaksi.id_transaksi, transaksi.tanggal_transaksi, transaksi.total_harga, transaksi.status,
+    transaksi.id_transaksi, transaksi.tanggal_transaksi, transaksi.total_harga, transaksi.status, transaksi.ongkir,
     pembayaran.metode_pembayaran, pembayaran.tanggal_bayar,
     barang.nama_barang, barang.gambar, detail_transaksi.jumlah, detail_transaksi.ukuran
     FROM transaksi
@@ -21,20 +21,23 @@ $query = "SELECT
     WHERE transaksi.id_user = $id_user
     ORDER BY transaksi.id_transaksi DESC";
 
+
 $result = mysqli_query($koneksi, $query);
 
 $transaksi = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $id = $row['id_transaksi'];
     if (!isset($transaksi[$id])) {
-        $transaksi[$id] = [
-            'tanggal' => $row['tanggal_transaksi'],
-            'total' => $row['total_harga'],
-            'status' => $row['status'],
-            'metode' => $row['metode_pembayaran'],
-            'tanggal_bayar' => $row['tanggal_bayar'],
-            'items' => []
-        ];
+ $transaksi[$id] = [
+    'tanggal' => $row['tanggal_transaksi'],
+    'total' => $row['total_harga'],
+    'ongkir' => $row['ongkir'],
+    'status' => $row['status'],
+    'metode' => $row['metode_pembayaran'],
+    'tanggal_bayar' => $row['tanggal_bayar'],
+    'items' => []
+];
+
     }
 
     $transaksi[$id]['items'][] = [
@@ -152,29 +155,30 @@ while ($row = mysqli_fetch_assoc($result)) {
                                 </div>
                             <?php endforeach; ?>
                         </div>
+<!-- Footer -->
+<div class="p-4 border-t border-gray-200 bg-gray-50">
+    <div class="flex flex-wrap justify-between items-center gap-4">
+        <div class="text-sm">
+            <span class="text-gray-500">Metode Pembayaran:</span>
+            <span class="font-medium text-gray-800 ml-1">
+                <?= $data['metode'] ? ucfirst($data['metode']) : '-' ?>
+            </span>
+            <?php if (!empty($data['tanggal_bayar'])) : ?>
+                <span class="text-gray-500 ml-3">
+                   (<?= date('d M Y H:i', strtotime($data['tanggal_bayar'])) ?>)
+                </span>
+            <?php endif; ?>
+        </div>
+        <div class="text-right text-sm text-gray-600">
+            <div>Subtotal: Rp<?= number_format($data['total'], 0, ',', '.') ?></div>
+            <div>Ongkir: Rp<?= number_format($data['ongkir'], 0, ',', '.') ?></div>
+            <div class="text-blue-700 font-bold">
+                Total Bayar: Rp<?= number_format($data['total'] + $data['ongkir'], 0, ',', '.') ?>
+            </div>
+        </div>
+    </div>
+</div>
 
-                        <!-- Footer -->
-                        <div class="p-4 border-t border-gray-200 bg-gray-50">
-                            <div class="flex flex-wrap justify-between items-center gap-4">
-                                <div class="text-sm">
-                                    <span class="text-gray-500">Metode Pembayaran:</span>
-                                    <span class="font-medium text-gray-800 ml-1">
-                                        <?= $data['metode'] ? ucfirst($data['metode']) : '-' ?>
-                                    </span>
-                                    <?php if (!empty($data['tanggal_bayar'])) : ?>
-                                        <span class="text-gray-500 ml-3">
-                                           (<?= date('d M Y H:i', strtotime($data['tanggal_bayar'])) ?>)
-                                        </span>
-                                    <?php endif; ?>
-                                </div>
-                                <div class="text-right">
-                                    <span class="text-sm text-gray-500">Total:</span>
-                                    <span class="font-bold text-blue-700 ml-1">
-                                        Rp<?= number_format($data['total'], 0, ',', '.') ?>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- Pesan Penolakan -->
                         <?php if ($status === 'ditolak') : ?>
