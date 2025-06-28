@@ -165,7 +165,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             </span>
             <?php if (!empty($data['tanggal_bayar'])) : ?>
                 <span class="text-gray-500 ml-3">
-                   (<?= date('d M Y H:i', strtotime($data['tanggal_bayar'])) ?>)
+                   (<?= date('Y-m-d H:i:s', strtotime($data['tanggal_bayar'])) ?>)
                 </span>
             <?php endif; ?>
         </div>

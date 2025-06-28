@@ -14,7 +14,8 @@ $sql = "SELECT
     pembayaran.bukti,
     pembayaran.status_pembayaran,
     pembayaran.tanggal_bayar,
-    transaksi.total_harga,
+    transaksi.total_harga, 
+    transaksi.ongkir, 
     transaksi.status,
     transaksi.jasa_pengiriman,
     users.username
@@ -405,7 +406,7 @@ $id = 1;
                             <td><?= $id++ ?></td>
                             <td><?= $data['username'] ?></td>
                             <td>#<?= $data['id_transaksi'] ?></td>
-                            <td>Rp<?= number_format($data['total_harga'], 0, ',', '.') ?></td>
+                            <td>Rp<?= number_format($data['total_harga'] + $data['ongkir'], 0, ',', '.') ?></td>
                             <td><?= ucfirst($data['metode']) ?></td>
                             <td><?= htmlspecialchars($data['jasa_pengiriman']) ?></td>
 
