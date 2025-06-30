@@ -167,7 +167,11 @@ while ($row = mysqli_fetch_assoc($result)) {
             </span>
             <?php if (!empty($data['tanggal_bayar'])) : ?>
                 <span class="text-gray-500 ml-3">
+<<<<<<< HEAD
                     (<?=  date('Y-m-d H:i:s', strtotime($data['tanggal_bayar'])) ?>)
+=======
+                    (<?= date('Y-m-d H:i:s', strtotime($data['tanggal_bayar'])) ?>)
+>>>>>>> 94aed9bba26b18b0fb9fff29ceb8a7326871f2c1
                 </span>
             <?php endif; ?>
         </div>
@@ -175,7 +179,11 @@ while ($row = mysqli_fetch_assoc($result)) {
             <div>Subtotal: Rp<?= number_format($data['total'], 0, ',', '.') ?></div>
             <div>Ongkir: Rp<?= number_format($data['ongkir'], 0, ',', '.') ?></div>
             <div class="text-blue-700 font-bold">
+<<<<<<< HEAD
                 Total Bayar: Rp<?= number_format($data['total'] + $data['ongkir'], 0, ',', '.') ?>
+=======
+                Total Bayar: Rp<?= number_format($data['total_harga'] + $data['ongkir'], 0, ',', '.') ?>
+>>>>>>> 94aed9bba26b18b0fb9fff29ceb8a7326871f2c1
             </div>
         </div>
     </div>
