@@ -72,37 +72,6 @@ include '../navbar.php';
         </div>
       </div>
     </div>
-
-    <!-- Team Section -->
-    <div class="glass-card rounded-xl shadow-xl overflow-hidden max-w-4xl mx-auto mt-12">
-      <div class="p-8 md:p-10">
-        <h2 class="text-2xl font-bold text-center text-gray-900 mb-8">Tim Kami</h2>
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-white shadow-lg">
-              <img src="img/team1.jpg" alt="Team Member" class="w-full h-full object-cover">
-            </div>
-            <h3 class="font-semibold text-lg">Budi Santoso</h3>
-            <p class="text-blue-600 text-sm">Founder & CEO</p>
-          </div>
-          <div class="text-center">
-            <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-white shadow-lg">
-              <img src="img/team2.jpg" alt="Team Member" class="w-full h-full object-cover">
-            </div>
-            <h3 class="font-semibold text-lg">Ani Wijaya</h3>
-            <p class="text-blue-600 text-sm">Head of Marketing</p>
-          </div>
-          <div class="text-center">
-            <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-white shadow-lg">
-              <img src="img/team3.jpg" alt="Team Member" class="w-full h-full object-cover">
-            </div>
-            <h3 class="font-semibold text-lg">Rudi Hermawan</h3>
-            <p class="text-blue-600 text-sm">Customer Service Manager</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- CTA Section -->
     <div class="text-center mt-12">
       <h3 class="text-xl font-semibold text-gray-900 mb-4">Ada pertanyaan atau butuh bantuan?</h3>

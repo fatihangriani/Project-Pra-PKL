@@ -82,13 +82,6 @@ include '../navbar.php';
             </div>
           </div>
           
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-              <label for="remember-me" class="ml-2 block text-sm text-gray-700">Ingat saya</label>
-            </div>
-          </div>
-          
           <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-200">
             Masuk
           </button>
@@ -115,13 +108,6 @@ include '../navbar.php';
           <p class="text-gray-700 mb-6">Buat akun untuk mendapatkan keuntungan eksklusif dan pengalaman belanja yang lebih baik.</p>
           
           <ul class="space-y-4">
-            <li class="flex items-start">
-              <div class="flex-shrink-0 h-6 w-6 text-blue-600">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-            </li>
             <li class="flex items-start">
               <div class="flex-shrink-0 h-6 w-6 text-blue-600">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
