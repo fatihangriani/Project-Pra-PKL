@@ -7,24 +7,26 @@ if (!isset($_SESSION['admin'])) {
 }
 include '../home/koneksi.php';
 
+// ✅ Query yang sudah benar
 $sql = "SELECT 
-    transaksi.id_transaksi, 
-    transaksi.id_user,
-    users.username, 
-    barang.nama_barang, 
-    barang.merk, 
-    detail_transaksi.ukuran,  
-    detail_transaksi.jumlah, 
-    transaksi.total_harga
+  transaksi.id_transaksi,
+  users.id_user,
+  users.username,
+  barang.nama_barang,
+  barang.merk,
+  barang.harga,
+  detail_transaksi.ukuran,
+  detail_transaksi.jumlah
 FROM transaksi
-INNER JOIN users ON transaksi.id_user = users.id_user
-INNER JOIN detail_transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi
-INNER JOIN barang ON detail_transaksi.id_barang = barang.id_barang
+JOIN users ON transaksi.id_user = users.id_user
+JOIN detail_transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi
+JOIN barang ON detail_transaksi.id_barang = barang.id_barang
 ORDER BY transaksi.id_transaksi DESC";
 
 $query = mysqli_query($koneksi, $sql);
 $id = 1;
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -376,7 +378,9 @@ $id = 1;
                             <td><?= $data['merk'] ?></td>
                             <td><?= $data['ukuran'] ?></td>
                             <td><?= $data['jumlah'] ?></td>
-                            <td>Rp<?= number_format($data['total_harga'], 0, ',', '.') ?></td>
+                            <?php $subtotal = $data['harga'] * $data['jumlah']; ?>
+                            <td>Rp<?= number_format($subtotal, 0, ',', '.') ?></td>
+
                             <td>
                                 <a href="detail_pesanan.php?id_transaksi=<?= $data['id_transaksi'] ?>" class="btn-aksi btn-detail">
                                     <i class="fas fa-info-circle"></i> Detail

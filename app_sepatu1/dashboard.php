@@ -130,13 +130,13 @@ body{background:#f8fafc;display:flex;min-height:100vh;color:#334155}
 <br><br>
   <!-- tombol download -->
 <div style="margin-top:20px">
-  <a href="export_pendapatan.php" class="btn-download btn-month"><i class="fas fa-download"></i> Download Pendapatan Bulanan</a>
-  <a href="export_harian.php"     class="btn-download btn-day"><i class="fas fa-download"></i> Download Pendapatan Hari Ini</a>
-  <br><br>
-  <a href="#" onclick="downloadPDF()" class="btn-download btn-month"><i class="fas fa-file-pdf"></i> Simpan Grafik sebagai PDF</a>
-  <a href="#" onclick="downloadImage()" class="btn-download btn-day"><i class="fas fa-image"></i> Simpan Grafik sebagai Gambar</a>
+  <a href="export_pendapatan.php" onclick="downloadPDF()" class="btn-download btn-month">
+    <i class="fas fa-file-pdf"></i> Simpan Grafik Perbulan
+  </a>
+  <a href="export_harian.php" class="btn-download btn-day">
+    <i class="fas fa-file-pdf"></i> Simpan Laporan Harian
+  </a>
 </div>
-
 
   <!-- laporan harian -->
   <h3 style="margin-top:40px"><i class="fas fa-calendar-day"></i> Laporan Pendapatan Hari Ini</h3>
@@ -191,18 +191,9 @@ async function downloadPDF() {
 
   const pdf = new jsPDF({ orientation: 'landscape' });
   pdf.text("Grafik Pendapatan Bulanan", 10, 10);
-  pdf.addImage(imgData, 'PNG', 10, 20, 270, 130); // sesuaikan ukuran jika perlu
+  pdf.addImage(imgData, 'PNG', 10, 20, 270, 130);
   pdf.save("grafik-pendapatan.pdf");
 }
 
-async function downloadImage() {
-  const canvas = await html2canvas(document.querySelector(".chart-container"));
-  const imgData = canvas.toDataURL("image/png");
-
-  const link = document.createElement("a");
-  link.href = imgData;
-  link.download = "grafik-pendapatan.png";
-  link.click();
-}
 </script>
 </body></html>

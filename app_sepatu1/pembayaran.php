@@ -1,5 +1,6 @@
 <?php
 session_set_cookie_params(['path' => '/']);
+date_default_timezone_set('Asia/Jakarta');
 session_start();
 if (!isset($_SESSION['admin'])) {
      echo "<script>alert('Silakan login terlebih dahulu.'); window.location='login_admin.php';</script>";

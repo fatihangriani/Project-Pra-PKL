@@ -167,15 +167,15 @@ while ($row = mysqli_fetch_assoc($result)) {
             </span>
             <?php if (!empty($data['tanggal_bayar'])) : ?>
                 <span class="text-gray-500 ml-3">
-                    (<?= date('d M Y, H:i', strtotime($data['tanggal_bayar'])) ?>)
+                    (<?=  date('Y-m-d H:i:s', strtotime($data['tanggal_bayar'])) ?>)
                 </span>
             <?php endif; ?>
         </div>
         <div class="text-right text-sm text-gray-600">
-            <div>Subtotal: Rp<?= number_format($data['total_harga'], 0, ',', '.') ?></div>
+            <div>Subtotal: Rp<?= number_format($data['total'], 0, ',', '.') ?></div>
             <div>Ongkir: Rp<?= number_format($data['ongkir'], 0, ',', '.') ?></div>
             <div class="text-blue-700 font-bold">
-                Total Bayar: Rp<?= number_format($data['total_bayar'] + $data['ongkir'], 0, ',', '.') ?>
+                Total Bayar: Rp<?= number_format($data['total'] + $data['ongkir'], 0, ',', '.') ?>
             </div>
         </div>
     </div>
