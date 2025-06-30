@@ -1,5 +1,6 @@
 <?php
 session_set_cookie_params(['path' => '/']);
+date_default_timezone_set('Asia/Jakarta');
 session_start();
 include '../home/koneksi.php';
 
@@ -83,6 +84,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         }
     </style>
 </head>
+
 <body class="bg-gray-50 min-h-screen">
     <div class="max-w-4xl mx-auto p-4 md:p-6">
         <div class="flex justify-between items-center mb-6">
@@ -165,20 +167,19 @@ while ($row = mysqli_fetch_assoc($result)) {
             </span>
             <?php if (!empty($data['tanggal_bayar'])) : ?>
                 <span class="text-gray-500 ml-3">
-                   (<?= date('Y-m-d H:i:s', strtotime($data['tanggal_bayar'])) ?>)
+                    (<?= date('d M Y, H:i', strtotime($data['tanggal_bayar'])) ?>)
                 </span>
             <?php endif; ?>
         </div>
         <div class="text-right text-sm text-gray-600">
-            <div>Subtotal: Rp<?= number_format($data['total'], 0, ',', '.') ?></div>
+            <div>Subtotal: Rp<?= number_format($data['total_harga'], 0, ',', '.') ?></div>
             <div>Ongkir: Rp<?= number_format($data['ongkir'], 0, ',', '.') ?></div>
             <div class="text-blue-700 font-bold">
-                Total Bayar: Rp<?= number_format($data['total'] + $data['ongkir'], 0, ',', '.') ?>
+                Total Bayar: Rp<?= number_format($data['total_bayar'] + $data['ongkir'], 0, ',', '.') ?>
             </div>
         </div>
     </div>
 </div>
-
 
                         <!-- Pesan Penolakan -->
                         <?php if ($status === 'ditolak') : ?>
